@@ -8,11 +8,11 @@ def index():
         db.select(Todo)
         .order_by(Todo.added_on.desc())
     ).scalars().all()
-    return render_template('main/index.html.jinja', todos=todos)
+    return render_template('main/index.html', todos=todos)
 
 
 def create():
-    return render_template('main/create.html.jinja')
+    return render_template('main/create.html')
 
 
 def store():
@@ -28,7 +28,7 @@ def store():
 def edit(todo_id: int):
     todo = db.get_or_404(Todo, todo_id)
 
-    return render_template('main/edit.html.jinja', todo=todo)
+    return render_template('main/edit.html', todo=todo)
 
 
 def update(todo_id: int):
