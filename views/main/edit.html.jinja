@@ -1,0 +1,11 @@
+{% extends "base.html.jinja" %}
+
+{% block content %}
+<h1>Edit todo</h1>
+<a href="{{ url_for('main.index' )}}">[Back]</a>
+<form action="{{ url_for('main.update', todo_id=todo.id)}}" method="POST">
+  <textarea id="todo-text" name="text" placeholder="What are your plans for today?" rows="8"
+    cols="100">{{ todo.text }}</textarea><br>
+  <input type="submit" value="Save" class="btn-update" data-id="{{ todo.id }}">
+</form>
+{% endblock %}

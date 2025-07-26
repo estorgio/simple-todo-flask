@@ -1,0 +1,25 @@
+{% extends "base.html.jinja" %}
+
+{% block content %}
+<h1>Simple TODO</h1>
+<a href="{{ url_for('main.create') }}">[Add new todo]</a>
+
+<ul class="todos">
+  {% if not todos %}
+  <div>There are no entries for now.</div>
+  {% endif %}
+
+  {% for todo in todos %}
+  <li class="todo {{ 'todo-done' if todo.is_done else '' }}">
+    <div class="todo-metadata">Added on {{todo.added_on.strftime("%B %d, %Y %I:%M %p")}}</div>
+    <div>{{ todo.text }}</div>
+    <div class="todo-controls">
+      <a href="#" class="btn-mark-as-read" data-id="{{ todo.id }}">[Mark as done]</a>
+      <a href="{{ url_for('main.edit', todo_id=todo.id) }}">[Edit]</a>
+      <a href="#" class="btn-delete" data-id="{{ todo.id }}">[Delete]</a>
+    </div>
+  </li>
+  {% endfor %}
+
+</ul>
+{% endblock %}

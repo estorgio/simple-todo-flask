@@ -1,0 +1,32 @@
+footer {
+  margin-top: 100px;
+}
+
+.todos {
+  padding-left: 0;
+  max-width: 800px;
+}
+
+.todo {
+  list-style: none;
+  padding: 13px 13px;
+}
+
+.todo-done,
+.todo-done a {
+  color: #b1b1b1;
+  text-decoration: none;
+}
+
+.todo:nth-child(odd) {
+  background-color: #e6e6e6;
+}
+
+.todo-metadata {
+  margin-bottom: 10px;
+  font-size: 13px;
+}
+
+.todo-controls {
+  margin-top: 10px;
+}

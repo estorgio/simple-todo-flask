@@ -1,0 +1,23 @@
+# Deployment config for Google App Engine
+
+service: 'simple-todo'
+
+runtime: python313
+
+instance_class: F1 # cheapest instance; optional
+
+automatic_scaling:
+  min_instances: 0
+  max_instances: 1
+
+env_variables:
+  # Secret key used for session and cookies
+  # To generate new keys, run the following command
+  # and paste it here
+  # python -c 'import secrets; print(secrets.token_hex())'
+  SECRET_KEY: ''
+
+  # Use demo sqlite database
+  DATABASE_URI: 'sqlite:////tmp/app/app.db'
+
+entrypoint: gunicorn -b :$PORT 'app:create_app()'
