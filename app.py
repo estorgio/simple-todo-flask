@@ -18,14 +18,6 @@ def create_app() -> Flask:
                 )
     app.secret_key = os.getenv('SECRET_KEY')
 
-    # @app.route('/debug/files')
-    # def list_files():
-    #     files = []
-    #     for root, dirs, filenames in os.walk('/tmp'):
-    #         for f in filenames:
-    #             files.append(os.path.join(root, f))
-    #     return '<br>'.join(files)
-
     from extensions import database
     database.init_app(app)
 
