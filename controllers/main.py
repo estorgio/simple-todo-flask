@@ -46,13 +46,6 @@ def update(todo_id: int):
 
     db.session.commit()
 
-    # if not request.json or 'text' not in request.json:
-    #     return jsonify({'success': False}), 400
-
-    # text = request.json['text']
-    # todo.text = text if text else ''
-    # db.session.commit()
-
     return jsonify({'success': True})
 
 
