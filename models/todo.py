@@ -1,7 +1,7 @@
 from extensions.database import Base
 from sqlalchemy.orm import Mapped, mapped_column
 from datetime import datetime
-from sqlalchemy import DateTime
+from sqlalchemy import DateTime, Text
 
 
 class Todo(Base):
@@ -9,7 +9,7 @@ class Todo(Base):
     allowed_fields = ['text', 'is_done']
 
     id: Mapped[int] = mapped_column(primary_key=True)
-    text: Mapped[str]
+    text: Mapped[str] = mapped_column(Text)
     added_on: Mapped[datetime] = mapped_column(
         DateTime, default=datetime.now)
     is_done: Mapped[bool] = mapped_column(default=False)
