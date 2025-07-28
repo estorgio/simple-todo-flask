@@ -2,11 +2,12 @@ from extensions.database import Base
 from sqlalchemy.orm import Mapped, mapped_column
 from datetime import datetime
 from sqlalchemy import DateTime, Text
+from models.mixins.mass_assign import MassAssignableMixin
 
 
-class Todo(Base):
+class Todo(MassAssignableMixin, Base):
     __tablename__ = 'todos'
-    allowed_fields = ['text', 'is_done']
+    __fillable__ = ['text', 'is_done']
 
     id: Mapped[int] = mapped_column(primary_key=True)
     text: Mapped[str] = mapped_column(Text)

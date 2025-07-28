@@ -16,9 +16,8 @@ def create():
 
 
 def store():
-    text = request.form.get('text')
-
-    todo = Todo(text=text)
+    todo = Todo()
+    todo.fill(request.form)
     db.session.add(todo)
     db.session.commit()
 
@@ -37,13 +36,7 @@ def update(todo_id: int):
     if not request.json:
         return jsonify({'success': False}), 400
 
-    for field, value in request.json.items():
-        if field in Todo.allowed_fields and hasattr(todo, field):
-            setattr(todo, field, value)
-        else:
-            # Optionally: skip or return 400 if the field doesn't exist
-            abort(400, description=f"Unknown field: {field}")
-
+    todo.fill(request.json)
     db.session.commit()
 
     return jsonify({'success': True})
