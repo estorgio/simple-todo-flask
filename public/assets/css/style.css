@@ -30,3 +30,22 @@ footer {
 .todo-controls {
   margin-top: 10px;
 }
+
+form.btn-delete,
+form.btn-delete input[type='submit'] {
+  display: inline-block;
+}
+
+form.btn-delete input[type='submit'] {
+  background: none;
+  color: blue;
+  text-decoration: underline;
+  border: none;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+}
+
+form.btn-delete button:hover {
+  color: darkblue; /* optional: change color on hover */
+}
