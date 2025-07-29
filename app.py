@@ -21,6 +21,9 @@ def create_app() -> Flask:
     from extensions import database
     database.init_app(app)
 
+    from extensions import method_override
+    method_override.init_app(app)
+
     from routes.main import main_route
     app.register_blueprint(main_route, url_prefix='/')
 
