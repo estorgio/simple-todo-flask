@@ -33,13 +33,14 @@ def edit(todo_id: int):
 def update(todo_id: int):
     todo = db.get_or_404(Todo, todo_id)
 
-    if not request.json:
-        return jsonify({'success': False}), 400
-
-    todo.fill(request.json)
-    db.session.commit()
-
-    return jsonify({'success': True})
+    if request.is_json and request.json:
+        todo.fill(request.json)
+        db.session.commit()
+        return jsonify({'success': True})
+    else:
+        todo.fill(request.form)
+        db.session.commit()
+        return redirect(url_for('main.index'))
 
 
 def destroy(todo_id: int):
@@ -48,4 +49,7 @@ def destroy(todo_id: int):
     db.session.delete(todo)
     db.session.commit()
 
-    return jsonify({'success': True})
+    if request.is_json and request.json:
+        return jsonify({'success': True})
+    else:
+        return redirect(url_for('main.index'))
