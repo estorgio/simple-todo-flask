@@ -62,7 +62,11 @@ async function updateTodo(todo_id) {
 
 async function deleteTodo(todo_id) {
   try {
-    const response = await fetch(`/${todo_id}`, { method: 'DELETE' });
+    const response = await fetch(`/${todo_id}`, {
+      method: 'DELETE',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ t: 't' }),
+    });
 
     const response_json = await response.json();
     console.log('Response JSON:', response_json);
@@ -78,4 +82,4 @@ async function deleteTodo(todo_id) {
 
 addEventToClasses('.btn-mark-as-read', 'click', markDoneTodo);
 addEventToClasses('.btn-update', 'click', updateTodo);
-addEventToClasses('.btn-delete', 'click', deleteTodo);
+addEventToClasses(".btn-delete input[type='submit']", 'click', deleteTodo);
