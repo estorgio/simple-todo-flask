@@ -1,6 +1,7 @@
 from flask import render_template, request, redirect, url_for, jsonify, abort
 from models.todo import Todo
 from extensions.database import db
+from forms.todos_form import TodosForm
 
 
 def index():
@@ -12,12 +13,17 @@ def index():
 
 
 def create():
-    return render_template('main/create.html')
+    form = TodosForm()
+    return render_template('main/create.html', form=form)
 
 
 def store():
+    form = TodosForm()
+    if not form.validate():
+        return redirect(url_for('main.create'))
+
     todo = Todo()
-    todo.fill(request.form)
+    todo.fill(form)
     db.session.add(todo)
     db.session.commit()
 

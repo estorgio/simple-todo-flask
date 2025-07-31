@@ -1,0 +1,5 @@
+{% for name, label, error in form_errors() %}
+  <div class="form-error">
+  <strong>Validation Error:</strong> {{ error }}
+  </div>
+{% endfor %}

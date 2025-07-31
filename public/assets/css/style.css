@@ -49,3 +49,11 @@ form.btn-delete input[type='submit'] {
 form.btn-delete button:hover {
   color: darkblue; /* optional: change color on hover */
 }
+
+.form-error {
+  border: 1px solid hsl(0, 68%, 38%);
+  margin: 10px 0;
+  background-color: hsl(0, 68%, 80%);
+  max-width: 800px;
+  padding: 5px 10px;
+}

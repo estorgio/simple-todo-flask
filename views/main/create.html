@@ -3,8 +3,12 @@
 {% block content %}
 <h1>Add new todo</h1>
 <a href="{{ url_for('main.index' )}}">[Back]</a>
+
+{% include "partials/validation-error.html" %}
+
 <form action="{{ url_for('main.store')}}" method="POST">
-  <textarea name="text" placeholder="What are your plans for today?" rows="8" cols="100"></textarea><br>
+  {{ form.csrf_token }}
+  {{ form.text(rows=8, cols=100, placeholder="What are your plans for today?") }} <br>
   <input type="submit" value="Save">
 </form>
 {% endblock %}

@@ -1,4 +1,5 @@
 from typing import Sequence
+from wtforms.fields import Field
 
 
 class MassAssignableMixin:
@@ -7,4 +8,7 @@ class MassAssignableMixin:
     def fill(self, data: dict):
         for field in self.__fillable__:
             if field in data:
-                setattr(self, field, data[field])
+                if isinstance(data[field], Field):
+                    setattr(self, field, data[field].data)
+                else:
+                    setattr(self, field, data[field])
