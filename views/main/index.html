@@ -1,29 +1,86 @@
-{% extends "base.html" %}
+{% extends "base.html" %} 
 
 {% block content %}
-<h1>Simple TODO</h1>
-<a href="{{ url_for('main.create') }}">[Add new todo]</a>
 
-<ul class="todos">
+<div class="row mt-3 text-right">
+  <div class="col">
+    <a
+      class="btn btn-primary btn-lg w-100 d-block d-lg-none"
+      role="button"
+      href="{{ url_for('main.create') }}"
+      >New Todo</a
+    >
+    <a
+      class="btn btn-primary btn-lg d-none d-lg-inline-block"
+      role="button"
+      href="{{ url_for('main.create') }}"
+      >New Todo</a
+    >
+  </div>
+</div>
+
+<div class="row mt-3 d-flex flex-column">
   {% if not todos %}
-  <div>There are no entries for now.</div>
+  <div class="col my-2">
+    <div class="fs-2 opacity-50">There are no entries for now.</div>
+  </div>
   {% endif %}
 
   {% for todo in todos %}
-  <li class="todo {{ 'todo-done' if todo.is_done else '' }}">
-    <div class="todo-metadata">Added on {{todo.added_on.strftime("%B %d, %Y %I:%M %p")}}</div>
-    <div>{{ todo.text }}</div>
-    <div class="todo-controls">
-      <a href="#" class="btn-mark-as-read" data-id="{{ todo.id }}">[Mark as done]</a>
-      <a href="{{ url_for('main.edit', todo_id=todo.id) }}">[Edit]</a>
-      {# <a href="#" class="btn-delete" data-id="{{ todo.id }}">[Delete]</a> #}
-      <form class="btn-delete" action="{{ url_for('main.destroy', todo_id=todo.id) }}" method="POST">
-        <input type="hidden" name="_method" value="DELETE">
-        <input type="submit" value="[Delete]" class="btn-delete" data-id="{{ todo.id }}">
-      </form>
+    <div class="col my-2">
+      <div class="card">
+        <div class="card-body">
+          <small class="{{ 'opacity-25' if todo.is_done else '' }}"
+            >Added on {{todo.added_on.strftime("%B %d, %Y %I:%M %p")}}</small
+          >
+          <p class="fs-2 {{ 'opacity-25' if todo.is_done else '' }}">
+            {{ todo.text }}
+          </p>
+          <a href="#" type="button" class="btn {{ 'btn-success' if todo.is_done else 'btn-outline-success'}} btn-mark-as-done" data-id="{{ todo.id }}">Mark as done</a>
+          <a href="{{ url_for('main.edit', todo_id=todo.id) }}" type="button" class="btn btn-outline-dark">Edit</a>
+
+          <form class="btn-delete d-inline-block" action="{{ url_for('main.destroy', todo_id=todo.id) }}" method="POST">
+            {{ form.csrf_token }}
+            <input type="hidden" name="_method" value="DELETE">
+            <input type="submit" value="Delete" class="btn-delete btn btn-outline-danger" data-id="{{ todo.id }}">
+          </form>
+        </div>
+      </div>
     </div>
-  </li>
   {% endfor %}
 
-</ul>
+</div>
+
+
+{# TODO: Implement pagination #}
+{# <div class="row mt-3">
+  <div class="col-12">
+    <div>
+      <ul class="pagination">
+        <li class="page-item disabled">
+          <a class="page-link" href="#">&laquo;</a>
+        </li>
+        <li class="page-item active">
+          <a class="page-link" href="#">1</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">2</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">3</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">4</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">5</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" href="#">&raquo;</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div> #}
+
 {% endblock %}

@@ -1,23 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Simple Todo</title>
+    <link
+      rel="stylesheet"
+      href="/vendor/bootstrap-5.3.7-dist/css/bootstrap.min.css"
+    />
+    <script
+      src="/vendor/bootstrap-5.3.7-dist/js/bootstrap.bundle.min.js"
+      defer
+    ></script>
+    <script src="/assets/js/script.js" defer></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% block title %}Home{% endblock %} - Simple TODO</title>
-  <link rel="stylesheet" href="/assets/css/style.css">
-  <script src="/assets/js/script.js" defer></script>
-</head>
+  <body>
+    <div class="min-vh-100 d-flex flex-column">
+      <div class="container mb-5">
+        <div class="row mt-5 text-center">
+          <div class="col">
+            <h1>Simple Todo</h1>
+            <small>A simple CRUD demo app made with Flask.</small>
+          </div>
+        </div>
 
-<body>
-  {% block content %}{% endblock %}
+{% block content %}{% endblock %}
+      </div>
 
-  <footer>
-    <hr>
-    <div>
-      Copyright &copy; 2025 Fortunato Estorgio. All Rights Reserved.
+      <div class="container mt-auto mb-4">
+        <footer class="row">
+          <div class="col">
+            <p class="mb-0">
+              <strong>Simple Todo</strong> by Fortunato Estorgio
+            </p>
+            <p>
+              This app is running in <strong>demo mode</strong>. All changes
+              made will disappear within 15 minutes or so.
+            </p>
+          </div>
+        </footer>
+      </div>
     </div>
-  </footer>
-</body>
-
+  </body>
 </html>

@@ -1,12 +1,59 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Edit todo</h1>
-<a href="{{ url_for('main.index' )}}">[Back]</a>
-<form action="{{ url_for('main.update', todo_id=todo.id)}}" method="POST">
-  <input type="hidden" name="_method" value="PUT">
-  <textarea id="todo-text" name="text" placeholder="What are your plans for today?" rows="8"
-    cols="100">{{ todo.text }}</textarea><br>
-  <input type="submit" value="Save" class="btn-update" data-id="{{ todo.id }}">
-</form>
+
+<div class="row mt-3 text-right">
+  <div class="col">
+    <a
+      class="btn btn-secondary btn-lg w-100 d-block d-lg-none"
+      role="button"
+      href="{{ url_for('main.index')}}"
+      >Go Back
+    </a>
+    <a
+      class="btn btn-secondary btn-lg d-none d-lg-inline-block"
+      role="button"
+      href="{{ url_for('main.index')}}"
+    >
+      Go Back
+    </a>
+  </div>
+</div>
+
+<div class="row mt-4 d-flex flex-column">
+  <div class="col-12">{% include "partials/validation-error.html" %}</div>
+  <div class="col-12">
+    <form action="{{ url_for('main.update', todo_id=todo.id)}}" method="POST">
+      {{ form.csrf_token }}
+      <input type="hidden" name="_method" value="PUT">
+      <div>
+        <label for="todo-text" class="form-label mt-4 d-none">
+          Contents:
+        </label>
+        <textarea
+          class="form-control fs-2"
+          id="todo-text"
+          rows="3"
+          placeholder="What is your task for today?"
+          name="text"
+          maxlength="512"
+        >{{ todo.text }}</textarea>
+        <input
+          type="submit"
+          class="btn btn-primary btn-lg mt-2 w-100 d-block d-lg-none"
+          value="Save Todo"
+        />
+        <input
+          type="submit"
+          class="btn btn-primary btn-lg mt-2 d-none d-lg-inline-block"
+          value="Save Todo"
+        />
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
 {% endblock %}

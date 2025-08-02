@@ -80,6 +80,6 @@ async function deleteTodo(todo_id) {
   }
 }
 
-addEventToClasses('.btn-mark-as-read', 'click', markDoneTodo);
+addEventToClasses('.btn-mark-as-done', 'click', markDoneTodo);
 addEventToClasses('.btn-update', 'click', updateTodo);
 addEventToClasses(".btn-delete input[type='submit']", 'click', deleteTodo);

@@ -5,11 +5,12 @@ from forms.todos_form import TodosForm
 
 
 def index():
+    form = TodosForm()
     todos = db.session.execute(
         db.select(Todo)
         .order_by(Todo.added_on.desc())
     ).scalars().all()
-    return render_template('main/index.html', todos=todos)
+    return render_template('main/index.html', todos=todos, form=form)
 
 
 def create():
@@ -31,9 +32,10 @@ def store():
 
 
 def edit(todo_id: int):
+    form = TodosForm()
     todo = db.get_or_404(Todo, todo_id)
 
-    return render_template('main/edit.html', todo=todo)
+    return render_template('main/edit.html', todo=todo, form=form)
 
 
 def update(todo_id: int):
@@ -44,6 +46,11 @@ def update(todo_id: int):
         db.session.commit()
         return jsonify({'success': True})
     else:
+        form = TodosForm()
+
+        if not form.validate():
+            return redirect(url_for('main.edit', todo_id=todo_id))
+
         todo.fill(request.form)
         db.session.commit()
         return redirect(url_for('main.index'))
