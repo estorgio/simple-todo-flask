@@ -45,3 +45,21 @@ $ gcloud app deploy
 # Open in browser
 $ gcloud app browse -s simple-todo
 ```
+
+## Custom Flask commands
+
+### Generate random todos
+
+Adds 100 randomized todos.
+
+```
+$ flask seeders todos
+```
+
+### Remove all the todos
+
+Empty the todos table
+
+```
+$ flask seeders clean
+```
