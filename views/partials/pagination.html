@@ -1,0 +1,43 @@
+{% macro render_pagination(pagination, endpoint) %}
+  {% set pages = pagination.iter_pages()|list %}
+  {% if pages and pages|last > 1 %}
+    <div class="row mt-3">
+      <div class="col-12">
+        <div>
+          <ul class="pagination mb-2 justify-content-center">
+            {# To get first page, use {{ pages|first }} #}
+            {# To get last page, use {{ pages|last }} #}
+            <li class="page-item {% if pagination.page <= pages|first %} disabled {% endif %}">
+              <a class="page-link" href="{{ url_for(endpoint, page=pagination.page - 1) }}">&laquo; <span>Prev</span></a>
+            </li>
+            {% for page in pages %}
+              {% if page %}
+                {% if page != pagination.page %}
+                  <li class="d-none d-lg-inline-block page-item">
+                    <a class="page-link" href="{{ url_for(endpoint, page=page) }}">{{ page }}</a>
+                  </li>
+                {% else %}
+                  <li class="d-none d-lg-inline-block page-item active">
+                    <a class="page-link" href="#">{{ page }}</a>
+                  </li>
+                {% endif %}
+              {% else %}
+                <li class="d-none d-lg-inline-block page-item disabled">
+                  <span class="page-link">…</span>
+                </li>
+              {% endif %}
+            {% endfor %}
+            <li class="page-item {% if pagination.page >= pages|last %} disabled {% endif %}">
+              <a class="page-link" href="{{ url_for(endpoint, page=pagination.page + 1) }}"><span>Next</span> &raquo;</a>
+            </li>
+          </ul>
+          
+          <div class="text-center">
+            <span>Page {{ pagination.page }} of {{ pages|last }}</span>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endmacro %}

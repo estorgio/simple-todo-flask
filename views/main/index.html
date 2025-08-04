@@ -20,7 +20,7 @@
 </div>
 
 <div class="row mt-3 d-flex flex-column">
-  {% if not todos %}
+  {% if not todos.total %}
   <div class="col my-2">
     <div class="fs-2 opacity-50">There are no entries for now.</div>
   </div>
@@ -51,36 +51,7 @@
 
 </div>
 
-
-{# TODO: Implement pagination #}
-{# <div class="row mt-3">
-  <div class="col-12">
-    <div>
-      <ul class="pagination">
-        <li class="page-item disabled">
-          <a class="page-link" href="#">&laquo;</a>
-        </li>
-        <li class="page-item active">
-          <a class="page-link" href="#">1</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">2</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">3</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">4</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">5</a>
-        </li>
-        <li class="page-item">
-          <a class="page-link" href="#">&raquo;</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</div> #}
+{% import "partials/pagination.html" as pagination %}
+{{ pagination.render_pagination(todos, 'main.index') }}
 
 {% endblock %}

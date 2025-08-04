@@ -6,10 +6,11 @@ from forms.todos_form import TodosForm
 
 def index():
     form = TodosForm()
-    todos = db.session.execute(
+    todos = db.paginate(
         db.select(Todo)
-        .order_by(Todo.added_on.desc())
-    ).scalars().all()
+        .order_by(Todo.added_on.desc()),
+        max_per_page=5,
+    )
     return render_template('main/index.html', todos=todos, form=form)
 
 
