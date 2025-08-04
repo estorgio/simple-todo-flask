@@ -20,4 +20,8 @@ env_variables:
   # Use demo sqlite database
   DATABASE_URI: 'sqlite:////tmp/app/app.db'
 
+  # Number of reverse proxies placed in front of Flask instance
+  # In case of GAE, it's just 1 reverse proxy 
+  PROXY_COUNT: 1
+
 entrypoint: gunicorn -b :$PORT 'app:create_app()'
