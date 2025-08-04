@@ -18,6 +18,9 @@ def create_app() -> Flask:
                 )
     app.secret_key = os.getenv('SECRET_KEY')
 
+    from extensions import ip_address
+    ip_address.init_app(app)
+
     from extensions import database
     database.init_app(app)
 
