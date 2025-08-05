@@ -11,7 +11,6 @@ def init_app(app: Flask) -> None:
             x_for=proxy_count,
             x_proto=proxy_count,
             x_host=proxy_count,
-            x_prefix=proxy_count
         )
 
     @app.context_processor
