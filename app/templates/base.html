@@ -25,7 +25,7 @@
           </div>
         </div>
 
-{% block content %}{% endblock %}
+        {% block content %}{% endblock %}
       </div>
 
       <div class="container mt-auto mb-4">
@@ -38,7 +38,10 @@
               This app is running in <strong>demo mode</strong>. All changes
               made will disappear within 15 minutes or so.
             </p>
-            <small>Viewing from your IP: <strong class="text-black-50">{{ client_ip }}</strong></small>
+            <small
+              >Viewing from your IP:
+              <strong class="text-black-50">{{ client_ip }}</strong></small
+            >
           </div>
         </footer>
       </div>

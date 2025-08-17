@@ -1,14 +1,13 @@
 import click
 from flask import Flask, Blueprint
-from extensions.database import db
-from models.todo import Todo
+from app.extensions.database import db
+from app.models.todo import Todo
 from faker import Faker
+from . import seeder_blueprint
 
-blueprint = Blueprint('seeders', __name__)
 
-
-@blueprint.cli.command('todos')
-def todos():
+@seeder_blueprint.cli.command('todos')
+def todos() -> None:
     fake = Faker()
     for _ in range(100):
         random_text = fake.sentence(100)
@@ -18,12 +17,8 @@ def todos():
     print('100 todos has been added.')
 
 
-@blueprint.cli.command('clean')
-def clean():
+@seeder_blueprint.cli.command('clean')
+def clean() -> None:
     db.session.execute(db.delete(Todo))
     db.session.commit()
     print('The database has been cleaned!')
-
-
-def init_app(app: Flask) -> None:
-    app.register_blueprint(blueprint)

@@ -9,4 +9,5 @@ def deploy_database():
         with open('/tmp/app/storage/Readme.txt', 'w') as file:
             file.write('This is a storage directory for app.')
 
-        shutil.copyfile('demo/app.db', '/tmp/app/app.db')
+        demo_db_path = os.getenv('DEMO_DB_SQLITE', 'demo/app.db')
+        shutil.copyfile(demo_db_path, '/tmp/app/app.db')

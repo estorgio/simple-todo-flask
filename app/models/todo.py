@@ -1,8 +1,8 @@
-from extensions.database import Base
+from app.extensions.database import Base
 from sqlalchemy.orm import Mapped, mapped_column
 from datetime import datetime
 from sqlalchemy import DateTime, Text
-from models.mixins.mass_assign import MassAssignableMixin
+from app.models.mixins.mass_assign import MassAssignableMixin
 
 
 class Todo(MassAssignableMixin, Base):
