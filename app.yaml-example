@@ -11,17 +11,23 @@ automatic_scaling:
   max_instances: 1
 
 env_variables:
+  # Set mode to production
+  FLASK_CONFIG: 'production'
+
   # Secret key used for session and cookies
   # To generate new keys, run the following command
   # and paste it here
   # python -c 'import secrets; print(secrets.token_hex())'
   SECRET_KEY: ''
 
+  # Source file for demo database
+  DEMO_DB_SQLITE: 'demo/app.db'
+
   # Use demo sqlite database
   DATABASE_URI: 'sqlite:////tmp/app/app.db'
 
   # Number of reverse proxies placed in front of Flask instance
-  # In case of GAE, it's just 1 reverse proxy 
+  # In case of GAE, it's just 1 reverse proxy
   PROXY_COUNT: 1
 
-entrypoint: gunicorn -b :$PORT 'app:create_app()'
+entrypoint: gunicorn -b :$PORT 'wsgi:create_app()'

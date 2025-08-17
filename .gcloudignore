@@ -28,3 +28,4 @@
 .venv/
 .mypy_cache/
 .env
+instance/app.db

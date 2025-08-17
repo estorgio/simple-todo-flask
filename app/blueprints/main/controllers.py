@@ -1,7 +1,7 @@
 from flask import render_template, request, redirect, url_for, jsonify, abort
-from models.todo import Todo
-from extensions.database import db
-from forms.todos_form import TodosForm
+from app.models.todo import Todo
+from app.extensions.database import db
+from app.blueprints.main.forms import TodosForm
 
 
 def index():

@@ -14,7 +14,7 @@ def init_app(app: Flask):
     db.init_app(app)
 
 
-def migrate(app):
+def migrate(app: Flask):
     migrate = Migrate(app, db)
 
 
